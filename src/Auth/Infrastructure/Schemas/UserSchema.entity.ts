@@ -2,25 +2,22 @@ import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
 @Entity({ tableName: 'users' })
 export class UserEntity {
-  @PrimaryKey()
+  @PrimaryKey({ type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   id!: string;
 
-  @Property({ unique: true })
+  @Property({ unique: true, length: 50 })
   username!: string;
 
-  @Property()
+  @Property({ length: 255 })
   password!: string;
 
   @Property({ default: false })
-  isAdmin!: boolean;
-
-  @Property({ type: 'json', default: [] })
-  roles: string[] = [];
+  isAdmin: boolean = false;
 
   @Property({ default: true })
-  isActive!: boolean;
+  isActive: boolean = true;
 
-  @Property()
+  @Property({ length: 255 })
   tenantId!: string;
 
   @Property({ onCreate: () => new Date() })
