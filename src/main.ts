@@ -1,6 +1,6 @@
-import { AppModule } from '@app/AppModule';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
+import { AppModule } from './App/AppModule';
 
 void (async() =>
 {

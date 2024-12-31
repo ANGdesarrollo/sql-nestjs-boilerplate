@@ -1,9 +1,8 @@
-import { AuthModule } from '@auth/AuthModule';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
-import { getTestAgent } from '@test/TestAgent';
 import TestAgent from 'supertest/lib/agent';
-import { it, beforeAll, describe, expect, afterAll } from 'vitest';
 
+import { AuthModule } from '../../src/Auth/AuthModule';
+import { getTestAgent } from '../TestAgent';
 
 let agent: TestAgent;
 let app: NestFastifyApplication;

@@ -16,7 +16,8 @@
     "incremental": true,
     "skipLibCheck": true,
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "strictNullChecks": false,
     "noImplicitAny": false,
@@ -25,13 +26,6 @@
     "noFallthroughCasesInSwitch": false,
     "typeRoots": [
       "./node_modules/@types"
-    ],
-    "paths": {
-      "@src/*": ["src/*"],
-      "@shared/*": ["src/Shared/*"],
-      "@app/*": ["src/App/*"],
-      "@auth/*": ["src/Auth/*"],
-      "@test/*": ["test/*"]
-    },
+    ]
   },
 }

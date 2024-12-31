@@ -1,11 +1,5 @@
-import { EntityGenerator } from '@mikro-orm/entity-generator';
-import { Migrator } from '@mikro-orm/migrations';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { PostgreSqlDriver } from '@mikro-orm/postgresql';
-import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
-import { SeedManager } from '@mikro-orm/seeder';
-import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { ModuleDefinition } from '@nestjs/core/interfaces/module-definition.interface';
 import {
   FastifyAdapter,
@@ -23,25 +17,7 @@ export const getTestAgent = async(
       await ConfigModule.forRoot({
         isGlobal: true
       }),
-      MikroOrmModule.forRootAsync({
-        useFactory: (configService: ConfigService) =>
-        {
-          return {
-            host: 'localhost',
-            driver: PostgreSqlDriver,
-            port: 5432,
-            user: 'root',
-            password: 'root',
-            dbName: 'sql_backend',
-            entities: ['dist/**/*.js'],
-            entitiesTs: ['src/**/*.ts'],
-            debug: true,
-            highlighter: new SqlHighlighter(),
-            metadataProvider: TsMorphMetadataProvider,
-            extensions: [Migrator, EntityGenerator, SeedManager]
-          };
-        }
-      }),
+      MikroOrmModule.forRoot(),
       ...modules
     ]
   }).compile();

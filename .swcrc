@@ -17,14 +17,6 @@
     },
     "keepClassNames": true,
     "baseUrl": "./",
-    "paths": {
-        "@src/*": ["./src/*"],
-        "@shared/*": ["./src/Shared/*"],
-        "@app/*": ["./src/App/*"],
-        "@auth/*": ["./src/Auth/*"],
-        "@test/*": ["test/*"]
-
-    },
   },
   "minify": false,
 }

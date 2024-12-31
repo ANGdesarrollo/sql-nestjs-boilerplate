@@ -1,14 +1,6 @@
 import swc from 'unplugin-swc';
 import { defineConfig } from 'vitest/config';
 
-const alias = {
-  '@src': 'src',
-  '@shared': 'src/Shared/*',
-  '@app/*': 'src/App/*',
-  '@auth/*': 'src/Auth/*',
-  '@test/*': 'test/*'
-};
-
 export default defineConfig({
   test: {
     environment: 'node',
@@ -17,7 +9,6 @@ export default defineConfig({
     globals: true,
     root: './',
     reporters: ['verbose'],
-    alias,
     coverage: {
       all: true,
       include: ['src/**/*.{ts,js}'],
@@ -27,9 +18,6 @@ export default defineConfig({
     },
     testTimeout: 16000,
     include: ['test/**/*.spec.ts']
-  },
-  resolve: {
-    alias
   },
   plugins: [swc.vite()]
 });
