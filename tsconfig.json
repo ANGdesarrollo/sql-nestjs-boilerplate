@@ -2,11 +2,13 @@
   "compilerOptions": {
     "module": "ESNext",
     "declaration": true,
+    "declarationMap": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
+    "useUnknownInCatchVariables": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2020",
+    "target": "ESNext",
     "sourceMap": true,
     "moduleResolution": "node",
     "outDir": "./dist",
@@ -23,6 +25,13 @@
     "noFallthroughCasesInSwitch": false,
     "typeRoots": [
       "./node_modules/@types"
-    ]
-  }
+    ],
+    "paths": {
+      "@src/*": ["src/*"],
+      "@shared/*": ["src/Shared/*"],
+      "@app/*": ["src/App/*"],
+      "@auth/*": ["src/Auth/*"],
+      "@test/*": ["test/*"]
+    },
+  },
 }

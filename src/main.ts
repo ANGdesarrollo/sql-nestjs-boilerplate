@@ -1,8 +1,9 @@
+import { AppModule } from '@app/AppModule';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './App/AppModule';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 
-(async () => {
+void (async() =>
+{
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
   app.setGlobalPrefix('api');
   await app.listen(process.env.PORT ?? 8000);

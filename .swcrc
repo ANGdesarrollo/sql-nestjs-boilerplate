@@ -1,14 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/swcrc",
   "sourceMaps": true,
-  "module": {
-   "type": "es6",
-  },
+    "module": {
+      "type": "commonjs"
+    },
   "jsc": {
+      "target": "ESNext",
     "parser": {
       "syntax": "typescript",
       "decorators": true,
-      "dynamicImport": true
+      "dynamicImport": true,
     },
     "transform": {
       "legacyDecorator": true,
@@ -17,7 +18,12 @@
     "keepClassNames": true,
     "baseUrl": "./",
     "paths": {
-      "@src/*": ["./src/**/*"],
+        "@src/*": ["./src/*"],
+        "@shared/*": ["./src/Shared/*"],
+        "@app/*": ["./src/App/*"],
+        "@auth/*": ["./src/Auth/*"],
+        "@test/*": ["test/*"]
+
     },
   },
   "minify": false,
