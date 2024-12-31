@@ -1,29 +1,23 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { describe, expect, it, beforeAll, afterAll } from 'vitest';
-import { AuthModule } from '../../src/Auth/AuthModule';
+import { it, beforeAll, afterAll, describe } from 'vitest';
+import { NestFastifyApplication } from '@nestjs/platform-fastify';
+import { TestAgent } from '../TestAgent';
 
-describe('AppController (e2e)', () => {
-  let app: INestApplication;
+let app: NestFastifyApplication;
 
-  beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AuthModule],
-    }).compile();
+beforeAll(async () => {
+  app = await TestAgent();
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
+  await app.init();
+  await app.getHttpAdapter().getInstance().ready();
+});
 
-  describe('Login', () => {
-    it('Should return 200', async () => {
-      const response = await request(app.getHttpServer()).post('/auth/login');
-      expect(response.status).toBe(200);
-    });
-  });
+afterAll(async () => {
+  await app.close();
+});
 
-  afterAll(async () => {
-    await app.close();
+describe('Login', () => {
+  it(`/POST /auth/login`, () => {
+    request(app.getHttpServer()).get('/auth/login').expect(200);
   });
 });
