@@ -1,7 +1,10 @@
+import { faker } from '@faker-js/faker/locale/ar';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 import TestAgent from 'supertest/lib/agent';
 
 import { AuthModule } from '../../src/Auth/AuthModule';
+import { UserPayload } from '../../src/Auth/Domain/Payloads/UserPayload';
+import { BinaryState } from '../../src/Shared/Domain/Repositories/BinaryState';
 import { getTestAgent } from '../TestAgent';
 
 let agent: TestAgent;
@@ -17,15 +20,22 @@ describe('User endpoints', () =>
   });
 
   afterAll(async() =>
-{
+  {
     await app.close();
   });
 
   describe('Register', () =>
   {
     it('/POST /auth/register', async() =>
-  {
-      const response = await agent.post('/api/auth/register').send();
+    {
+      const payload: UserPayload = {
+        username: faker.internet.username(),
+        password: faker.internet.password(),
+        is_admin: BinaryState.False,
+        is_active: BinaryState.True
+      };
+
+      const response = await agent.post('/api/auth/register').send(payload);
       expect(response.status).toBe(201);
     });
   });

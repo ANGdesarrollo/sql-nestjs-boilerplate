@@ -1,13 +1,5 @@
-import { Injectable } from '@nestjs/common';
-
 import { BaseRepository } from '../../Shared/Domain/Repositories/BaseRepository';
-import { PrismaService } from '../../Shared/Infrastructure/DatabaseService';
+import { UserDomain } from '../Domain/Entities/UserDomain';
+import { UserPayload } from '../Domain/Payloads/UserPayload';
 
-@Injectable()
-export class UserRepository extends BaseRepository
-{
-  constructor(prisma: PrismaService)
-  {
-    super(prisma, 'user');
-  }
-}
+export abstract class UserRepository extends BaseRepository<UserPayload, UserDomain> {}

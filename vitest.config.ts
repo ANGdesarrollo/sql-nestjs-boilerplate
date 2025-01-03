@@ -19,5 +19,25 @@ export default defineConfig({
     testTimeout: 16000,
     include: ['test/**/*.spec.ts']
   },
-  plugins: []
+  plugins: [swc.vite({
+    sourceMaps: true,
+    module: {
+      type: 'es6'
+    },
+    jsc: {
+      target: 'esnext',
+      parser: {
+        syntax: 'typescript',
+        decorators: true,
+        dynamicImport: true
+      },
+      transform: {
+        legacyDecorator: true,
+        decoratorMetadata: true
+      },
+      keepClassNames: true,
+      baseUrl: __dirname
+    },
+    minify: false
+  })]
 });

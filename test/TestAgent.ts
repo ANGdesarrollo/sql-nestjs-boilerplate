@@ -6,16 +6,22 @@ import {
 } from '@nestjs/platform-fastify';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
+import TestAgent from 'supertest/lib/agent';
+
+import { SharedModule } from '../src/Shared/SharedModule';
+
+export type TestAgentType = { agent: TestAgent, app: NestFastifyApplication };
 
 export const getTestAgent = async(
   ...modules: ModuleDefinition[]
-): Promise<any> =>
+): Promise<TestAgentType> =>
 {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [
       await ConfigModule.forRoot({
         isGlobal: true
       }),
+      SharedModule,
       ...modules
     ]
   }).compile();
