@@ -22,9 +22,9 @@ describe('User endpoints', () =>
   });
 
   describe('Register', () =>
-{
+  {
     it('/POST /auth/register', async() =>
-{
+  {
       const response = await agent.post('/api/auth/register').send();
       expect(response.status).toBe(201);
     });

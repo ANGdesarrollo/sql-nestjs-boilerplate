@@ -1,11 +1,8 @@
 import { BaseDomain } from '../../../Shared/Domain/Repositories/BaseDomain';
+import { UserPayload } from '../Payloads/UserPayload';
 
-export interface UserDomain extends BaseDomain {
-  username: string;
-  password: string;
-  isAdmin: boolean;
-  isActive: boolean;
-  tenantId: string;
-  createdAt: Date;
-  updatedAt: Date;
+export interface UserDomain extends UserPayload, BaseDomain {
+  tenant_id: string | null;
+  roles: string[];
 }
+

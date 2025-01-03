@@ -19,5 +19,5 @@ export default defineConfig({
     testTimeout: 16000,
     include: ['test/**/*.spec.ts']
   },
-  plugins: [swc.vite()]
+  plugins: []
 });
