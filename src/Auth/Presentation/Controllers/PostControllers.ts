@@ -1,9 +1,10 @@
-import { Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { RegisterUserUseCase } from '../../Application/RegisterUserUseCase';
 
 @Controller('auth')
 export class PostController
 {
-  constructor() {}
+  constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -14,8 +15,8 @@ export class PostController
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  register()
-{
-    return;
+  register(@Body() body: any)
+  {
+    return this.registerUserUseCase.execute(body);
   }
 }

@@ -1,8 +1,8 @@
-import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AuthModule } from '../Auth/AuthModule';
+import { SharedModule } from '../Shared/SharedModule';
 
 import { AppController } from './Presentation/AppController';
 
@@ -11,7 +11,7 @@ import { AppController } from './Presentation/AppController';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    MikroOrmModule.forRoot(),
+    SharedModule,
     AuthModule
   ],
   controllers: [AppController]

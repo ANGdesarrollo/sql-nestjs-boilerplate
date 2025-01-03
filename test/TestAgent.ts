@@ -1,4 +1,3 @@
-import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { ConfigModule } from '@nestjs/config';
 import { ModuleDefinition } from '@nestjs/core/interfaces/module-definition.interface';
 import {
@@ -17,7 +16,6 @@ export const getTestAgent = async(
       await ConfigModule.forRoot({
         isGlobal: true
       }),
-      MikroOrmModule.forRoot(),
       ...modules
     ]
   }).compile();
