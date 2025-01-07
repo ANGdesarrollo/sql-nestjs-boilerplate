@@ -4,7 +4,7 @@ model Tenant {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  users User[]
+  users User[] @relation("user_tenants")
 
   @@map("tenants")
 }

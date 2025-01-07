@@ -20,7 +20,6 @@ export class PostController
   @HttpCode(HttpStatus.CREATED)
   register(@Body() body: UserPayload): Promise<UserDomain>
   {
-    console.log('entre desde el testing', this.registerUserUseCase);
     return this.registerUserUseCase.execute(body);
   }
 }
