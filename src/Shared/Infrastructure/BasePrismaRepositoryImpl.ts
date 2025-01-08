@@ -15,5 +15,13 @@ export abstract class BasePrismaRepositoryImpl<D, T> implements BaseRepository<D
       data: entity
     });
   }
-}
 
+  async findOneBy<K extends keyof T>(fieldName: K, fieldValue: T[K]): Promise<T>
+  {
+    return this.prisma[this.entityName].findUniqueOrThrow({
+      where: {
+        [fieldName]: fieldValue
+      }
+    });
+  }
+}

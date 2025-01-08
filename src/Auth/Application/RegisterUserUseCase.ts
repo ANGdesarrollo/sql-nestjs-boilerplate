@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserDomain } from '../Domain/Entities/UserDomain';
-import { UserPayload } from '../Domain/Payloads/UserPayload';
+import { HashService } from '../Domain/Services/HashService';
 import { UserRepository } from '../Infrastructure/UserRepository';
+import { RegisterUserDto } from '../Presentation/Dtos/RegisterUserDto';
 
 @Injectable()
 export class RegisterUserUseCase
 {
-  constructor(private repository: UserRepository) {}
+  constructor(private readonly repository: UserRepository, private readonly hashService: HashService) {}
 
-  async execute(user: UserPayload): Promise<UserDomain>
+  async execute(user: RegisterUserDto): Promise<void>
   {
-    return this.repository.create(user);
+    user.password = await this.hashService.hash(user.password);
+
+    await this.repository.create(user);
   }
 }

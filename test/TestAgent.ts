@@ -9,6 +9,7 @@ import request from 'supertest';
 import TestAgent from 'supertest/lib/agent';
 
 import { SharedModule } from '../src/Shared/SharedModule';
+import fastifyCookie from '@fastify/cookie';
 
 export type TestAgentType = { agent: TestAgent, app: NestFastifyApplication };
 
@@ -31,6 +32,10 @@ export const getTestAgent = async(
   );
 
   app.setGlobalPrefix('api');
+
+  await app.register(fastifyCookie, {
+    secret: process.env.COOKIE_SECRET
+  });
 
   await app.init();
   await app.getHttpAdapter().getInstance().ready();

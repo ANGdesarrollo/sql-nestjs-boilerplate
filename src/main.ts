@@ -1,11 +1,35 @@
+import fastifyCookie from '@fastify/cookie';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { FastifyAdapter } from '@nestjs/platform-fastify';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+
+
 import { AppModule } from './App/AppModule';
 
-void (async() =>
+async function bootstrap()
 {
-  const app = await NestFactory.create(AppModule, new FastifyAdapter());
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter()
+  );
+
   app.setGlobalPrefix('api');
-  await app.listen(process.env.PORT ?? 8000);
-  console.log(`Application is running on: ${await app.getUrl()}`);
-})();
+
+  const PORT = process.env.PORT ?? 8000;
+
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true
+  }));
+
+  await app.register(fastifyCookie, {
+    secret: process.env.COOKIE_SECRET
+  });
+
+  await app.listen(PORT);
+
+  Logger.log(`🚀 Server is running on port ${PORT}`);
+}
+
+void bootstrap();

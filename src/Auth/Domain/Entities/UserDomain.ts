@@ -1,8 +1,11 @@
-import { BaseDomain } from '../../../Shared/Domain/Repositories/BaseDomain';
-import { UserPayload } from '../Payloads/UserPayload';
+import { BinaryState } from '../../../Shared/Domain/Repositories/BinaryState';
 
-export interface UserDomain extends UserPayload, BaseDomain {
-  tenant_id: string | null;
+export interface UserDomain {
+  id: string;
+  username: string;
+  password: string;
   roles: string[];
+  tenant_id: string[];
+  is_admin: BinaryState;
+  is_active: BinaryState;
 }
-
