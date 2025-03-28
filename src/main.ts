@@ -1,4 +1,5 @@
 import fastifyCookie from '@fastify/cookie';
+import fastifyMultipart from '@fastify/multipart';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
@@ -25,6 +26,13 @@ async function bootstrap()
 
   await app.register(fastifyCookie, {
     secret: process.env.COOKIE_SECRET
+  });
+
+  await app.register(fastifyMultipart, {
+    limits: {
+      fileSize: 10 * 1024 * 1024,
+      files: 1
+    }
   });
 
   await app.listen(PORT);

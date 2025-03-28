@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AuthModule } from '../Auth/AuthModule';
+import { FileModule } from '../File/FileModule';
 import { SharedModule } from '../Shared/SharedModule';
 
 import { AppController } from './Presentation/AppController';
@@ -12,7 +13,8 @@ import { AppController } from './Presentation/AppController';
       isGlobal: true
     }),
     SharedModule,
-    AuthModule
+    AuthModule,
+    FileModule
   ],
   controllers: [AppController]
 })

@@ -101,3 +101,4 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 # sql-nestjs-boilerplate
 # sql-nestjs-boilerplate
 # sql-nestjs-boilerplate
+# trading_dashboard_control_backend

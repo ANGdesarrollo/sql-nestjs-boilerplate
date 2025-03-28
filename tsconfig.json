@@ -26,6 +26,6 @@
     "noFallthroughCasesInSwitch": false,
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
   },
 }
